@@ -1,0 +1,162 @@
+-- Load Orion library
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
+
+-- Create main window
+local Window = OrionLib:MakeWindow({
+    Name = "SussyScripHub",
+    HidePremium = false,
+    Introtext = "Dupe",
+    SaveConfig = true,
+    ConfigFolder = "SussyScripHub"
+})
+
+-- Section for Dupe Button
+local DupeTab = Window:MakeTab({
+    Name = "Dupe",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local DupeSection = DupeTab:AddSection({
+    Name = "Dupe Section"
+})
+
+DupeSection:AddTextbox({
+    Name = "Type the name of the pet to dupe",
+    TextDisappear = true,
+    Callback = function(Value)
+        local petName = tostring(Value)
+        print("Pet to dupe set to: " .. petName)
+    end
+})
+
+DupeSection:AddButton({
+    Name = "Dupe",
+    Callback = function()
+        -- Add your dupe script functionality here
+        print("Dupe script executed.")
+    end    
+})
+
+-- Section for Digsite Button
+local DigsiteTab = Window:MakeTab({
+    Name = "Digsite",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local DigsiteSection = DigsiteTab:AddSection({
+    Name = "Digsite Section"
+})
+
+DigsiteSection:AddButton({
+    Name = "Digsite",
+    Callback = function()
+        -- Add your digsite script functionality here
+        print("Digsite script executed!")
+    end    
+})
+
+-- Section for 🔥Dupe Huges🔥 Button
+local DupeHugesTab = Window:MakeTab({
+    Name = "🔥Dupe Huges🔥",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local DupeHugesSection = DupeHugesTab:AddSection({
+    Name = "Dupe Huges Section"
+})
+
+local hugeNameInput = "Huge Avenging Griffin"  -- Default value for Huge Name
+
+DupeHugesSection:AddTextbox({
+    Name = "Huge Name",
+    Default = hugeNameInput,
+    TextDisappear = true,
+    Callback = function(Value)
+        hugeNameInput = Value
+        print("Huge Name set to: " .. hugeNameInput)
+    end
+})
+
+DupeHugesSection:AddButton({
+    Name = "Dupe!🤫",
+    Callback = function()
+        local lib = require(game.ReplicatedStorage.Library)
+        local fromPet = "Dog"  -- Using the default value "Dog"
+        local toPet = hugeNameInput
+        
+        for i, v in pairs(lib.Directory.Pets[fromPet]) do
+            lib.Directory.Pets[fromPet][i] = nil
+        end
+        for i, v in pairs(lib.Directory.Pets[toPet]) do
+            lib.Directory.Pets[fromPet][i] = v
+        end
+        
+        print("Changed pets from " .. fromPet .. " to " .. toPet)
+    end    
+})
+
+-- Section for Gem Dupe Button
+local GemDupeTab = Window:MakeTab({
+    Name = "Gem Dupe",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local GemDupeSection = GemDupeTab:AddSection({
+    Name = "Gem Dupe Section"
+})
+
+local gemAmountInput = "100"  -- Default value
+
+GemDupeSection:AddTextbox({
+    Name = "Number of Gems",
+    Default = gemAmountInput,
+    TextDisappear = true,
+    Callback = function(Value)
+        gemAmountInput = Value
+        print("Gem amount set to: " .. gemAmountInput)
+    end
+})
+
+GemDupeSection:AddButton({
+    Name = "Dupe Gems",
+    Callback = function()
+        -- Add your gem dupe script functionality here
+        print("Gem dupe script executed.")
+    end    
+})
+
+-- Section for Credit Button
+local CreditTab = Window:MakeTab({
+    Name = "Credit",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local CreditSection = CreditTab:AddSection({
+    Name = "Credit Section"
+})
+
+CreditSection:AddButton({
+    Name = "🔥SussyScrip🔥",
+    Callback = function()
+        -- Copy to clipboard function
+        local function copyToClipboard(text)
+            local clipboard = game:GetService("ClipboardService")
+            clipboard:SetClipboard(text)
+        end
+        
+        -- URL to copy to clipboard
+        local url = "https://www.youtube.com/channel/UCD9D2LIPzLSOJ4af6OaYF2A"
+        
+        -- Copy the URL to clipboard
+        copyToClipboard(url)
+        print("URL copied to clipboard: " .. url)
+    end
+})
+
+-- Initialize the Orion library
+OrionLib:Init()
